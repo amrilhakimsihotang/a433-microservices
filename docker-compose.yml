@@ -1,0 +1,36 @@
+version: '3.8' #Versi Docker Compose yang digunakan versi 3.8
+
+services: #layanan yang akan running adalah service item-db
+  item-db:
+    image: mongo:3 #image database yang digunakan mongo3
+    
+    volumes:
+      - app-db:/data/db #volume untuk app-db
+                  
+    restart: always  #memastikan bahwa kontainer selalu di-restart jika terhenti.
+
+    networks: # network yang digunakan
+      - mynetwork
+
+  item-app:  #layanan yang akan running adalah service item-app 
+    image: ghcr.io/amrilhakimsihotang/a433-microservices/item-app:v1
+    
+    ports: #port yang digunakan image dari docker hub 
+           #dimana port 80 dari host akan diarahkan ke port 8080
+      - '80:8080'
+         
+    depends_on: #Service item-app akan running setelah service item-db running. 
+      - item-db
+
+   
+    restart: always #memastikan bahwa kontainer selalu di-restart jika terhenti. 
+
+    networks:
+      - mynetwork #network yang digunakan
+
+volumes: #volume untuk app db
+  app-db:
+
+networks:
+  mynetwork: # network yang digunakan
+    driver: bridge # dengan driver bridge
