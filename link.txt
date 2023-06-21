@@ -1,0 +1,11 @@
+link github project submission 2
+https://github.com/amrilhakimsihotang/a433-microservices
+
+
+link github image karsajobs
+ghcr.io/amrilhakimsihotang/a433-microservices/amril2023/karsajobs:latest
+
+
+link github image karsajobs-ui
+
+ghcr.io/amrilhakimsihotang/a433-microservices/amril2023/karsajobs-ui:latest

@@ -1,0 +1,23 @@
+#Versi API yang digunakan
+apiVersion: v1
+
+#Nama Jenis objek yang digunakan
+kind: Service
+
+#Informasi metadata untuk objek
+metadata:
+  name: mongo-service
+spec:
+ #Selector yang digunakan untuk memilih pod yang akan dihubungkan dengan layanan ini
+ #(dalam hal ini, pod dengan label "app: mongodb")
+  selector:
+    app: mongodb
+  
+  #Daftar port yang diekspos oleh layanan ini.  
+  ports:
+    - name: mongo-port
+      protocol: TCP
+      port: 27017
+      targetPort: 27017
+  type: ClusterIP #Jenis layanan yang akan digunakan 
+

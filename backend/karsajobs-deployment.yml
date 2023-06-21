@@ -1,0 +1,48 @@
+#Versi API yang digunakan
+apiVersion: apps/v1
+
+#Nama Jenis objek Deployment
+kind: Deployment
+
+#Metadata ini berisi informasi tambahan tentang objek seperti nama dan label
+metadata:
+  name: karsajobs-deployment
+  labels:
+    app: karsajobs
+spec:
+  replicas: 3 # replika pod
+  selector:
+    #label karsajobs yang akan terhubung dengan service
+    matchLabels:
+      app: karsajobs
+  template: #template pod untuk menentukan label
+    metadata:
+      labels:
+        app: karsajobs
+    spec:
+      containers:
+        - name: karsajobs
+          #image yang akan digunakan container
+          image: ghcr.io/amrilhakimsihotang/a433-microservices/amril2023/karsajobs:latest
+          ports:
+            - containerPort: 8080
+          
+          #konfigurasi env  untuk user dan App
+          env:
+            - name: APP_PORT
+              value: "8080"
+            
+            - name: MONGO_HOST
+              value: mongo-service
+
+            - name: MONGO_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: MONGO_ROOT_USERNAME
+              
+            - name: MONGO_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: MONGO_ROOT_PASSWORD

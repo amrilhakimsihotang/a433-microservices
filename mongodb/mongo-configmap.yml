@@ -1,0 +1,16 @@
+#Versi API yang digunakan
+apiVersion: v1
+
+#Jenis objek ConfigMap
+kind: ConfigMap
+
+#Metadata yang berisi informasi tentang konfigurasi mongo-db
+metadata:
+  name: mongo-config
+ 
+ #Konfigurasi penyimpanan untuk MongoDB
+data:
+  mongo.config: |
+
+storage: #Direktori tempat MongoDB menyimpan data
+    dbPath: /data/db
