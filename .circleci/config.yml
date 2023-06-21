@@ -1,11 +1,10 @@
+version: 2.1
+
 environment:
       # Konfigurasi
       GITHUB_USERNAME="amrilhakimsihotang"
       GITHUB_TOKEN="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"
-      IMAGE_NAME="karsajobs"
-      TAG="latest"
       REPOSITORY="a433-microservices"
-version: 2.1
 
 jobs:
   lint-dockerfile:
@@ -38,28 +37,29 @@ jobs:
       - run:
           name: Run unit tests
           command: go test -v -short --count=1 $(go list ./...)
-
+  
   build-app-karsajobs:
-      - image: circleci/golang:1.16
-     
+    docker:
+    - image: circleci/golang:1.16
     steps:
       - checkout
       - setup_remote_docker
       # Build and push image
       - run:
-        name: "Build Image"
-        command: docker build -t $IMAGE_NAME:$TAG .
+         name: "Build Image"
+         command: docker build -t karsajobs:latest .
       
       - run:
-        name: "Rename Image"
-        command: docker tag $IMAGE_NAME:$TAG ghcr.io/$GITHUB_USERNAME/$IMAGE_NAME:$TAG
+         name: "Rename Image"
+         command: docker tag karsajobs:latest ghcr.io/$GITHUB_USERNAME/karsajobs:latest
 
-      - run :
-        name:"Login"
-        command: $GITHUB_TOKEN | docker login ghcr.io -u $GITHUB_USERNAME --password-stdin      
       - run:
-        name: "push image"
-        command: docker push ghcr.io/$GITHUB_USERNAME/$REPOSITORY/$IMAGE_NAME:$TAG
+         name: "Login"
+         command: echo $GITHUB_ACCESS_TOKEN | docker login ghcr.io -u $GITHUB_USERNAME --password-stdin      
+      
+      - run:
+         name: "push image ke github registry"
+         command: docker push ghcr.io/$GITHUB_USERNAME/$REPOSITORY/karsajobs:latest
 
 
 workflows:
