@@ -52,11 +52,12 @@ jobs:
           command: |
             #1. Perintah build docker image untuk backend
             echo "Membuat Docker image..."
-            docker build -t $IMAGE_NAME:$IMAGE_TAG . 
+
+            docker build -t ghcr.io/$IMAGE_NAME:${CIRCLE_SHA1} . 
 
             # Tagging image untuk GitHub Container Registry..
             echo "Tagging Docker image untuk GitHub Container Registry..."
-            docker tag $IMAGE_NAME:$IMAGE_TAG ghcr.io/$GITHUB_USERNAME/$REPOSITORY/$IMAGE_NAME:$IMAGE_TAG
+            docker tag $IMAGE_NAME:${CIRCLE_SHA1} ghcr.io/$GITHUB_USERNAME/$REPOSITORY/$IMAGE_NAME:${CIRCLE_SHA1}
 
             #2.Login ke GitHub Container Registry(menerapkan saran kedua)
             echo "Masuk ke GitHub Container Registry..."
@@ -64,7 +65,7 @@ jobs:
 
             #3.Push image ke GitHub Container Registry(menerapkan saran kedua)
             echo "Push image ke GitHub Container Registry..."
-            docker push ghcr.io/$GITHUB_USERNAME/$REPOSITORY/$IMAGE_NAME:$IMAGE_TAG
+            docker push ghcr.io/$GITHUB_USERNAME/$REPOSITORY/$IMAGE_NAME:${CIRCLE_SHA1}
 
             # Logout dari GitHub Container Registry
             echo "Logout dari GitHub Container Registry..."
