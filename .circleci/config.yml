@@ -2,8 +2,8 @@ environment:
       # Konfigurasi
       GITHUB_USERNAME="amrilhakimsihotang"
       GITHUB_TOKEN="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"
-      IMAGE_NAME="amril2023/karsajobs"
-      IMAGE_TAG="latest"
+      IMAGE_NAME="karsajobs"
+      TAG="latest"
       REPOSITORY="a433-microservices"
 version: 2.1
 
@@ -40,18 +40,28 @@ jobs:
           command: go test -v -short --count=1 $(go list ./...)
 
   build-app-karsajobs:
-    machine:
-      - image: ubuntu22:latest
-      - docker_layer_caching: true
-
+      - image: circleci/golang:1.16
+     
     steps:
       - checkout
-
+      - setup_remote_docker
       # Build and push image
       - run:
-          name: Build and push image
-          command: |
-           build_push_image_karsajobs.sh
+        name: "Build Image"
+        command: docker build -t $IMAGE_NAME:$TAG .
+      
+      - run:
+        name: "Rename Image"
+        command: docker tag $IMAGE_NAME:$TAG ghcr.io/$GITHUB_USERNAME/$IMAGE_NAME:$TAG
+
+      - run :
+        name:"Login"
+        command: $GITHUB_TOKEN | docker login ghcr.io -u $GITHUB_USERNAME --password-stdin      
+      - run:
+        name: "push image"
+        command: docker push ghcr.io/$GITHUB_USERNAME/$REPOSITORY/$IMAGE_NAME:$TAG
+
+
 workflows:
   version: 2.1
   lint-test-build-workflow:
