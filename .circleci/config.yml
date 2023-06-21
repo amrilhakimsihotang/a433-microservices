@@ -1,8 +1,5 @@
 version: 2.1
 
-environment:
-      # Konfigurasi
-      GITHUB_TOKEN="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"
 jobs:
   lint-dockerfile:
     docker: #Menggunakan image Docker circleci/golang:1.16
@@ -52,7 +49,7 @@ jobs:
 
       - run:
          name: "Login"
-         command: echo "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"| docker login ghcr.io -u amrilhakimsihotang --password-stdin      
+         command: echo "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" | docker login ghcr.io -u amrilhakimsihotang --password-stdin      
       
       - run:
          name: "push image ke github registry"
