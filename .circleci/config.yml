@@ -2,10 +2,7 @@ version: 2.1
 
 environment:
       # Konfigurasi
-      GITHUB_USERNAME="amrilhakimsihotang"
       GITHUB_TOKEN="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"
-      REPOSITORY="a433-microservices"
-
 jobs:
   lint-dockerfile:
     docker: #Menggunakan image Docker circleci/golang:1.16
@@ -51,15 +48,15 @@ jobs:
       
       - run:
          name: "Rename Image"
-         command: docker tag karsajobs:latest ghcr.io/$GITHUB_USERNAME/$REPOSITORY/karsajobs:latest
+         command: docker tag karsajobs:latest ghcr.io/amrilhakimsihotang/a433-microservices/karsajobs:latest
 
       - run:
          name: "Login"
-         command: echo $GITHUB_ACCESS_TOKEN | docker login ghcr.io -u $GITHUB_USERNAME --password-stdin      
+         command: echo $GITHUB_ACCESS_TOKEN | docker login ghcr.io -u amrilhakimsihotang --password-stdin      
       
       - run:
          name: "push image ke github registry"
-         command: docker push ghcr.io/$GITHUB_USERNAME/$REPOSITORY/karsajobs:latest
+         command: docker push ghcr.io/amrilhakimsihotang/a433-microservices/karsajobs:latest
 
 
 workflows:
