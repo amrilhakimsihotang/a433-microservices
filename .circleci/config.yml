@@ -40,8 +40,9 @@ jobs:
           command: go test -v -short --count=1 $(go list ./...)
 
   build-app-karsajobs:
-    docker:
-      - image: circleci/golang:1.16
+    machine:
+      - image: ubuntu22:latest
+      - docker_layer_caching: true
 
     steps:
       - checkout
@@ -50,29 +51,7 @@ jobs:
       - run:
           name: Build and push image
           command: |
-            #1. Perintah build docker image untuk backend
-            echo "Membuat Docker image..."
-
-            docker build -t amril2023/karsajobs:latest . 
-
-            # Tagging image untuk GitHub Container Registry..
-            echo "Tagging Docker image untuk GitHub Container Registry..."
-            docker tag amril2023/karsajobs:latest ghcr.io/$GITHUB_USERNAME/$REPOSITORY/amril2023/karsajobs:latest
-
-            #2.Login ke GitHub Container Registry(menerapkan saran kedua)
-            echo "Masuk ke GitHub Container Registry..."
-            echo $GITHUB_TOKEN | docker login ghcr.io -u $GITHUB_USERNAME --password-stdin
-
-            #3.Push image ke GitHub Container Registry(menerapkan saran kedua)
-            echo "Push image ke GitHub Container Registry..."
-            docker push ghcr.io/$GITHUB_USERNAME/$REPOSITORY/amril2023/karsajobs:latest
-
-            # Logout dari GitHub Container Registry
-            echo "Logout dari GitHub Container Registry..."
-            docker logout ghcr.io
-
-            # Image upload selesai
-            echo "Image upload selesai!"
+           build_push_image_karsajobs.sh
 workflows:
   version: 2.1
   lint-test-build-workflow:
