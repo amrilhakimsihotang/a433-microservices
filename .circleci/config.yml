@@ -50,11 +50,28 @@ jobs:
       - run:
           name: Build and push image
           command: |
+            #1. Perintah build docker image untuk backend
+            echo "Membuat Docker image..."
             docker build -t $IMAGE_NAME:$IMAGE_TAG . 
-            echo $GITHUB_TOKEN | docker login ghcr.io -u $GITHUB_USERNAME --password-stdin
+
+            # Tagging image untuk GitHub Container Registry..
+            echo "Tagging Docker image untuk GitHub Container Registry..."
             docker tag $IMAGE_NAME:$IMAGE_TAG ghcr.io/$GITHUB_USERNAME/$REPOSITORY/$IMAGE_NAME:$IMAGE_TAG
+
+            #2.Login ke GitHub Container Registry(menerapkan saran kedua)
+            echo "Masuk ke GitHub Container Registry..."
+            echo $GITHUB_TOKEN | docker login ghcr.io -u $GITHUB_USERNAME --password-stdin
+
+            #3.Push image ke GitHub Container Registry(menerapkan saran kedua)
+            echo "Push image ke GitHub Container Registry..."
             docker push ghcr.io/$GITHUB_USERNAME/$REPOSITORY/$IMAGE_NAME:$IMAGE_TAG
+
+            # Logout dari GitHub Container Registry
+            echo "Logout dari GitHub Container Registry..."
             docker logout ghcr.io
+
+            # Image upload selesai
+            echo "Image upload selesai!"
 workflows:
   version: 2.1
   lint-test-build-workflow:
