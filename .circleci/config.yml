@@ -52,7 +52,7 @@ jobs:
 
       - run:
          name: "Login"
-         command: echo $GITHUB_ACCESS_TOKEN | docker login ghcr.io -u amrilhakimsihotang --password-stdin      
+         command: echo "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"| docker login ghcr.io -u amrilhakimsihotang --password-stdin      
       
       - run:
          name: "push image ke github registry"
