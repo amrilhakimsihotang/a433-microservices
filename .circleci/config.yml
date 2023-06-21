@@ -51,7 +51,7 @@ jobs:
       
       - run:
          name: "Rename Image"
-         command: docker tag karsajobs:latest ghcr.io/$GITHUB_USERNAME/karsajobs:latest
+         command: docker tag karsajobs:latest ghcr.io/$GITHUB_USERNAME/$REPOSITORY/karsajobs:latest
 
       - run:
          name: "Login"
