@@ -1,0 +1,65 @@
+# Konfigurasi
+GITHUB_USERNAME="amrilhakimsihotang"
+GITHUB_TOKEN="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"
+IMAGE_NAME="amril2023/karsajobs"
+IMAGE_TAG="latest"
+REPOSITORY="a433-microservices"
+
+
+version: 2.1
+jobs:
+  lint-dockerfile:
+    docker: #Menggunakan image Docker circleci/golang:1.16
+      - image: circleci/golang:1.16
+
+    steps:
+      - checkout
+
+      #Download dan install hadolint
+      - run:
+          name: Install hadolint
+          command: |
+            wget https://github.com/hadolint/hadolint/releases/download/v2.7.0/hadolint-Linux-x86_64
+            chmod +x hadolint-Linux-x86_64
+            sudo mv hadolint-Linux-x86_64 /usr/local/bin/hadolint
+
+      #Jalankan hadolint  Dockerfile
+      - run:
+          name: Run hadolint
+          command: hadolint Dockerfile
+
+  test-app: 
+    docker: #Menggunakan image Docker circleci/golang:1.16
+      - image: circleci/golang:1.16
+
+    steps:
+      - checkout
+
+      #Jalankan unit tests for backend
+      - run:
+          name: Run unit tests
+          command: go test -v -short --count=1 $(go list ./...)
+
+  build-app-karsajobs:
+    docker:
+      - image: circleci/golang:1.16
+
+    steps:
+      - checkout
+
+      # Build and push image
+      - run:
+          name: Build and push image
+          command: |
+            docker build -t $IMAGE_NAME:$IMAGE_TAG . 
+            echo $GITHUB_TOKEN | docker login ghcr.io -u $GITHUB_USERNAME --password-stdin
+            docker tag $IMAGE_NAME:$IMAGE_TAG ghcr.io/$GITHUB_USERNAME/$REPOSITORY/$IMAGE_NAME:$IMAGE_TAG
+            docker push ghcr.io/$GITHUB_USERNAME/$REPOSITORY/$IMAGE_NAME:$IMAGE_TAG
+            docker logout ghcr.io
+workflows:
+  version: 2.1
+  lint-test-build-workflow:
+    jobs:
+      - lint-dockerfile
+      - test-app
+      - build-app-karsajobs
