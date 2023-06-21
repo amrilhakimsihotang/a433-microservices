@@ -1,18 +1,16 @@
-version: 2.1
-
-jobs:
-  lint-dockerfile:
-    docker: #Menggunakan image Docker circleci/golang:1.16
-      - image: circleci/golang:1.16
-
-      environment:
+environment:
       # Konfigurasi
       GITHUB_USERNAME="amrilhakimsihotang"
       GITHUB_TOKEN="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"
       IMAGE_NAME="amril2023/karsajobs"
       IMAGE_TAG="latest"
       REPOSITORY="a433-microservices"
+version: 2.1
 
+jobs:
+  lint-dockerfile:
+    docker: #Menggunakan image Docker circleci/golang:1.16
+      - image: circleci/golang:1.16
     steps:
       - checkout
 
