@@ -1,4 +1,3 @@
-
 # Konfigurasi
 GITHUB_USERNAME="amrilhakimsihotang"
 GITHUB_TOKEN="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"
