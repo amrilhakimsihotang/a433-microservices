@@ -7,9 +7,8 @@ kind: Service
 #Metadata tambahan untuk objek Service
 metadata:
   name: karsajobs-service
-
-labels:
-  name: karsajobs-service
+  labels:
+   name: karsajobs-service
 
 #Spesifikasi konfigurasi Service  
 spec:

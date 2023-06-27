@@ -5,6 +5,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: mongo
+  label: statefulset mongo
 spec:
   #StatefulSet ini diberi nama "mongo" 
   #dan akan menjalankan 3 replika

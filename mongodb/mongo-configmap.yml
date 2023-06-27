@@ -7,7 +7,7 @@ kind: ConfigMap
 #Metadata yang berisi informasi tentang konfigurasi mongo-db
 metadata:
   name: mongo-config
- 
+   
  #Konfigurasi penyimpanan untuk MongoDB
 data:
   mongo.config: |
