@@ -38,11 +38,11 @@ spec:
             - name: MONGO_USER
               valueFrom:
                 secretKeyRef:
-                  name: mongo-secret
+                  name: mongodb-secret
                   key: MONGO_ROOT_USERNAME
               
             - name: MONGO_PASS
               valueFrom:
                 secretKeyRef:
-                  name: mongo-secret
+                  name: mongodb-secret
                   key: MONGO_ROOT_PASSWORD
