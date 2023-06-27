@@ -13,4 +13,4 @@ data:
   mongo.config: |
 
 storage: #Direktori tempat MongoDB menyimpan data
-    dbPath: "/data/db"
+    dbPath: /data/db
