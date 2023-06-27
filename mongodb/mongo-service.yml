@@ -6,7 +6,12 @@ kind: Service
 
 #Informasi metadata untuk objek
 metadata:
+<<<<<<< HEAD
   name: mongodb-service
+=======
+  name: mongo-service
+  
+>>>>>>> 98f969404d256f6384a92432a0f3ce5b4193006b
 spec:
  #Selector yang digunakan untuk memilih pod yang akan dihubungkan dengan layanan ini
  #(dalam hal ini, pod dengan label "app: mongodb")

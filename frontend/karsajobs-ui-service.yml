@@ -8,8 +8,8 @@ kind: Service
 metadata:
   name: karsajobs-ui
 
-labels:
-  name: karsajobs-ui
+  labels:
+   name: karsajobs-ui
 
 #Spesifikasi konfigurasi Service  
 spec:
@@ -21,8 +21,8 @@ spec:
   #Mendefinisikan port yang akan digunakan oleh Service.
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: 80
+      port: 8000
+      targetPort: 8000
       NodePort : 3009
   type: NodePort # Jenis service yang digunakan adalah Nodeport
   #agar Service dapat diakses dari luar cluster 
