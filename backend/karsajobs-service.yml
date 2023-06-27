@@ -7,7 +7,7 @@ kind: Service
 #Metadata tambahan untuk objek Service
 metadata:
   name: karsajobs-service
-
+  
 labels:
   name: karsajobs-service
 
@@ -22,8 +22,6 @@ spec:
   ports:
     - protocol: TCP
       port: 8080
-      targetPort: 8080
-      NodePort : 30010
   type: NodePort # Jenis service yang digunakan adalah Nodeport
   #agar Service dapat diakses dari luar cluster 
   #melalui port yang akan diberikan oleh Minikube

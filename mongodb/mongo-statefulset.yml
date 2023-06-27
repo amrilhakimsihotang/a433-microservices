@@ -4,29 +4,31 @@ apiVersion: apps/v1
 #Nama Jenis objek
 kind: StatefulSet
 metadata:
-  name: mongo
+  name: mongodb-statefulset
 spec:
   #StatefulSet ini diberi nama "mongo" 
   #dan akan menjalankan 3 replika
-  serviceName: "mongo"
+  serviceName: mongodb-service
   replicas: 3
 
   #Selector digunakan  u/ memilih pod-pod yang
   #terkait dengan statefulset berdasarkan label "app=mongo"
   selector:
     matchLabels:
-      app: mongo
+      app: mongodb
   template:
     metadata:
       labels:
-        app: mongo
+        app: mongodb
     spec:
     
     #Template pod memiliki konfigurasi yang mencakup
     # container bernama mongo
       containers:
-        - name: mongo
+        - name: mongodb
           image: mongo #image docker
+          ports:
+            - containerPort: 27017
 
           env: #Container "mongo" memiliki variabel 
           #untuk menginisialisasi 
