@@ -22,7 +22,7 @@ spec:
   storageClassName: manual  #Nama kelas penyimpanan yang akan digunakan oleh PVC
   
   hostPath:
-    path: "/data/db"  #Path di host mesin tempat data PV akan disimpan
+    path: /data/db  #Path di host mesin tempat data PV akan disimpan
 
 #Versi API yang digunakan
 apiVersion: v1
