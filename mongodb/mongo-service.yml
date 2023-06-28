@@ -7,6 +7,8 @@ kind: Service
 #Informasi metadata untuk objek
 metadata:
   name: mongodb-service
+  labels:
+   name: mongodb-service
 spec:
  #Selector yang digunakan untuk memilih pod yang akan dihubungkan dengan layanan ini
  #(dalam hal ini, pod dengan label "app: mongodb")
