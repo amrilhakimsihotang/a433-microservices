@@ -7,8 +7,8 @@ kind: PersistentVolume
 metadata:
   name: mongo-pv  #Nama PersistentVolume
 
-labels:
-  type: local #label pada object local
+  labels:
+   type: local #label pada object local
 
 spec:
   capacity:
