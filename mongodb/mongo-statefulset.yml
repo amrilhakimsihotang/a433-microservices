@@ -58,10 +58,13 @@ spec:
           persistentVolumeClaim: #mongo-data yang di mounted ke mongo-pvc
             claimName: mongodb-pvc
 
+        - name: mongo-credentials
+          secret: #mongo-credentials yang di mounted ke mongo-secret
+            secretName: mongodb-secret
+
         - name: mongo-config
           configMap: #mongo-config yang di mounted ke mongo-configmap
             name: mongo-configmap
 
-        - name: mongo-credentials
-          secret: #mongo-credentials yang di mounted ke mongo-secret
-            secretName: mongodb-secret
+        
+          
