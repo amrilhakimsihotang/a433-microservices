@@ -12,5 +12,5 @@ metadata:
 data:
   mongo.config: |
 
-storage: #Direktori tempat MongoDB menyimpan data
-    dbPath: /data/db
+     storage: #Direktori tempat MongoDB menyimpan data
+       dbPath: /data/db
