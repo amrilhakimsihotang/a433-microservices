@@ -53,7 +53,7 @@ spec:
               mountPath: /etc/mongo-credentials
 
       #tiga volume yang didefinisikan:        
-      volumeMounts:
+      volumes:
         - name: mongo-data
           persistentVolumeClaim: #mongo-data yang di mounted ke mongo-pvc
             claimName: mongodb-pvc
