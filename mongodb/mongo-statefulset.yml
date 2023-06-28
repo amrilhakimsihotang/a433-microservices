@@ -52,7 +52,7 @@ spec:
               mountPath: /data/db
             - name: mongo-credentials
               mountPath: /etc/mongo-credentials
-            - name: mongo-config-maps
+            - name: mongo-config-map
               mountPath: /config
             
       #tiga volume yang didefinisikan:        
@@ -65,12 +65,10 @@ spec:
           secret: #mongo-credentials yang di mounted ke mongo-secret
             secretName: mongodb-secret
 
-        - name: mongo-config-maps
+        - name: mongo-config-map
           configMap:
             name: mongo-config
-            items:
-              - key: mongo.conf
-                path: mongo.conf
+         
 
         
           
