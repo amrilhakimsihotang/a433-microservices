@@ -7,7 +7,7 @@ kind: Deployment
 #Metadata ini berisi informasi tambahan tentang objek seperti nama dan label
 metadata:
   name: karsajobs-ui-deployment
-  label: 
+  labels: 
     app: karsajobs-ui-deployment
 
 spec:
