@@ -19,7 +19,7 @@ spec:
     matchLabels:
       app: mongo
       tier: backend
-  Servicename: mongo    
+  serviceName: mongo    
   template:
     metadata:
       labels:
@@ -52,7 +52,7 @@ spec:
               mountPath: /data/db
             - name: mongo-credentials
               mountPath: /etc/mongo-credentials
-            - name: mongo-config
+            - name: mongo-config-maps
               mountPath: /config
             
       #tiga volume yang didefinisikan:        
@@ -65,9 +65,9 @@ spec:
           secret: #mongo-credentials yang di mounted ke mongo-secret
             secretName: mongodb-secret
 
-        - name: mongo-config
+        - name: mongo-config-maps
           configMap:
-            name: mongo-configmap
+            name: mongo-config
             items:
               - key: mongo.conf
                 path: mongo.conf
