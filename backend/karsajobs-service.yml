@@ -9,7 +9,7 @@ metadata:
   name: karsajobs-service
   
   labels:
-   name: karsajobs-service
+   app: karsajobs-service
 
 
 #Spesifikasi konfigurasi Service  
@@ -24,7 +24,7 @@ spec:
     - protocol: TCP
       port: 8080
       targetPort: 8080
-      NodePort : 30092
+      
   type: NodePort # Jenis service yang digunakan adalah Nodeport
   #agar Service dapat diakses dari luar cluster 
   #melalui port yang akan diberikan oleh Minikube
