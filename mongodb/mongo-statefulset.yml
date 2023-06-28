@@ -18,10 +18,13 @@ spec:
   selector:
     matchLabels:
       app: mongo
+      tier: backend
+  Servicename: mongo    
   template:
     metadata:
       labels:
         app: mongo
+        tier: backend
 
     spec:    
     #Template pod memiliki konfigurasi yang mencakup
@@ -47,11 +50,11 @@ spec:
           volumeMounts:
             - name: mongo-data
               mountPath: /data/db
-            - name: mongo-config
-              mountPath: /config
             - name: mongo-credentials
               mountPath: /etc/mongo-credentials
-
+            - name: mongo-config
+              mountPath: /config
+            
       #tiga volume yang didefinisikan:        
       volumes:
         - name: mongo-data
@@ -63,8 +66,11 @@ spec:
             secretName: mongodb-secret
 
         - name: mongo-config
-          configMap: #mongo-config yang di mounted ke mongo-configmap
+          configMap:
             name: mongo-configmap
+            items:
+              - key: mongo.conf
+                path: mongo.conf
 
         
           
