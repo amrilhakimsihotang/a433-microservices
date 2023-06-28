@@ -6,8 +6,8 @@ kind: PersistentVolumeClaim
 metadata:
   name: mongodb-pvc  # Nama PersistentVolumeClaim
 
-labels:
- app: mongo #label pada object mongo
+  labels:
+    app: mongo #label pada object mongo
 
 spec:
   accessModes:
