@@ -21,28 +21,28 @@ spec:
         app: karsajobs
     spec:
       containers:
-        - name: karsajobs
-          #image yang akan digunakan container
-          image: ghcr.io/amrilhakimsihotang/a433-microservices/amril2023/karsajobs:latest
-          ports:
-            - containerPort: 8080
-          
-          #konfigurasi env  untuk user dan App
-          env:
-            - name: APP_PORT
-              value: "8080"
-            
-            - name: MONGO_HOST
-              value: mongodb-service
+      - name: karsajobs
+        #image yang akan digunakan container
+        image: ghcr.io/amrilhakimsihotang/a433-microservices/amril2023/karsajobs:latest
+        ports:
+        - containerPort: 8080
 
-            - name: MONGO_USER
-              valueFrom:
-                secretKeyRef:
-                  name: mongodb-secret
-                  key: MONGO_ROOT_USERNAME
-              
-            - name: MONGO_PASS
-              valueFrom:
-                secretKeyRef:
-                  name: mongodb-secret
-                  key: MONGO_ROOT_PASSWORD
+        #konfigurasi env  untuk user dan App
+        env:
+        - name: APP_PORT
+          value: "8080"
+
+        - name: MONGO_HOST
+          value: mongodb-service
+
+        - name: MONGO_USER
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-secret
+              key: MONGO_ROOT_USERNAME
+
+        - name: MONGO_PASS
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-secret
+              key: MONGO_ROOT_PASSWORD

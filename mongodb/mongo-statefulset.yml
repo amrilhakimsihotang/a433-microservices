@@ -5,7 +5,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: mongodb-statefulset
-  labels: 
+  labels:
     statefulset: mongo
 spec:
   #StatefulSet ini diberi nama "mongo" 
@@ -19,56 +19,52 @@ spec:
     matchLabels:
       app: mongo
       tier: backend
-  serviceName: mongo    
+  serviceName: mongo
   template:
     metadata:
       labels:
         app: mongo
         tier: backend
 
-    spec:    
-    #Template pod memiliki konfigurasi yang mencakup
-    # container bernama mongo
+    spec:
+      #Template pod memiliki konfigurasi yang mencakup
+      # container bernama mongo
       containers:
-        - name: mongodb
-          image: mongo #image docker
-          ports:
-            - containerPort: 27017
+      - name: mongodb
+        image: mongo #image docker
+        ports:
+        - containerPort: 27017
 
-          env: #Container "mongo" memiliki variabel untuk menginisialisasi username dan password root MongoDB dari file yang ditentukan.
-            - name: MONGO_INITDB_ROOT_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: mongodb-secret 
-                  key: username #/etc/mongo-credentials/MONGO_ROOT_USERNAME
-            - name: MONGO_INITDB_ROOT_PASSWORD
-              valueFrom: 
-                 secretKeyRef:
-                  name: mongodb-secret
-                  key: password #/etc/mongo-credentials/MONGO_ROOT_PASSWORD
-          #beberapa volumeMounts yang akan di mounted path pada container dengan volume yang digunakan
-          volumeMounts:
-            - name: mongo-data
-              mountPath: /data/db
-            - name: mongo-credentials
-              mountPath: /etc/mongo-credentials
-            - name: mongo-config-map
-              mountPath: /config
-            
+        env: #Container "mongo" memiliki variabel untuk menginisialisasi username dan password root MongoDB dari file yang ditentukan.
+        - name: MONGO_INITDB_ROOT_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-secret
+              key: username #/etc/mongo-credentials/MONGO_ROOT_USERNAME
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-secret
+              key: password #/etc/mongo-credentials/MONGO_ROOT_PASSWORD
+        #beberapa volumeMounts yang akan di mounted path pada container dengan volume yang digunakan
+        volumeMounts:
+        - name: mongo-data
+          mountPath: /data/db
+        - name: mongo-credentials
+          mountPath: /etc/mongo-credentials
+        - name: mongo-config-map
+          mountPath: /config
+
       #tiga volume yang didefinisikan:        
       volumes:
-        - name: mongo-data
-          persistentVolumeClaim: #mongo-data yang di mounted ke mongo-pvc
-            claimName: mongodb-pvc
+      - name: mongo-data
+        persistentVolumeClaim: #mongo-data yang di mounted ke mongo-pvc
+          claimName: mongodb-pvc
 
-        - name: mongo-credentials
-          secret: #mongo-credentials yang di mounted ke mongo-secret
-            secretName: mongodb-secret
+      - name: mongo-credentials
+        secret: #mongo-credentials yang di mounted ke mongo-secret
+          secretName: mongodb-secret
 
-        - name: mongo-config-map
-          configMap:
-            name: mongo-config
-         
-
-        
-          
+      - name: mongo-config-map
+        configMap:
+          name: mongo-config

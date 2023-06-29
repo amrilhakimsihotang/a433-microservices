@@ -5,21 +5,21 @@ apiVersion: v1
 kind: PersistentVolume
 
 metadata:
-  name: mongo-pv  #Nama PersistentVolume
+  name: mongo-pv #Nama PersistentVolume
 
   labels:
-   type: local #label pada object local
+    type: local #label pada object local
 
 spec:
   capacity:
-    storage: 1Gi  #Kapasitas penyimpanan yang dialokasikan untuk PersistentVolume
-  
+    storage: 1Gi #Kapasitas penyimpanan yang dialokasikan untuk PersistentVolume
+
   accessModes:
-    - ReadWriteOnce  #Mode akses volume-hanya dapat read/write sekali
-  
-  persistentVolumeReclaimPolicy: Retain  #Kebijakan pengambilan kembali PV jika PVC dihapus
-  
-  storageClassName: manual  #Nama kelas penyimpanan yang akan digunakan oleh PVC
-  
+  - ReadWriteOnce #Mode akses volume-hanya dapat read/write sekali
+
+  persistentVolumeReclaimPolicy: Retain #Kebijakan pengambilan kembali PV jika PVC dihapus
+
+  storageClassName: manual #Nama kelas penyimpanan yang akan digunakan oleh PVC
+
   hostPath:
-    path: /data/db  #Path di host mesin tempat data PV akan disimpan
+    path: /data/db #Path di host mesin tempat data PV akan disimpan

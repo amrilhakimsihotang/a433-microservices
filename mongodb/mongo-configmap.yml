@@ -8,8 +8,8 @@ kind: ConfigMap
 metadata:
   name: mongo-config
   labels:
-    app: mongo 
- #Konfigurasi penyimpanan untuk MongoDB
+    app: mongo
+    #Konfigurasi penyimpanan untuk MongoDB
 data:
   mongo.config: |
 
