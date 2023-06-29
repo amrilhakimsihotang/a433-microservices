@@ -11,7 +11,7 @@ metadata:
     app: karsajobs-ui-deployment
 
 spec:
-  replicas: 3 #Menentukan jumlah replika yang akan dijalankan
+  replicas: 1 #Menentukan jumlah replika yang akan dijalankan
   selector:
     matchLabels: #label karsajobs-ui yang akan terhubung dengan service
       app: karsajobs-ui

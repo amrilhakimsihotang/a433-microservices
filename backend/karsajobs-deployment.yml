@@ -10,7 +10,7 @@ metadata:
   labels:
     app: karsajobs
 spec:
-  replicas: 3 # replika pod
+  replicas: 1 # replika pod
   selector:
     #label karsajobs yang akan terhubung dengan service
     matchLabels:

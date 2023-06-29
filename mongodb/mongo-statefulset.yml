@@ -9,9 +9,9 @@ metadata:
     statefulset: mongo
 spec:
   #StatefulSet ini diberi nama "mongo" 
-  #dan akan menjalankan 3 replika
+  #dan akan menjalankan 1 replika
   serviceName: mongodb-service
-  replicas: 3
+  replicas: 1
 
   #Selector digunakan  u/ memilih pod-pod yang
   #terkait dengan statefulset berdasarkan label "app=mongo"
@@ -19,7 +19,7 @@ spec:
     matchLabels:
       app: mongo
       tier: backend
-  serviceName: mongo
+  #serviceName: mongo
   template:
     metadata:
       labels:
@@ -27,11 +27,12 @@ spec:
         tier: backend
 
     spec:
+      restartPolicy: Always #memastikan bahwa kontainer selalu di-restart jika terhenti. 
       #Template pod memiliki konfigurasi yang mencakup
-      # container bernama mongo
+      # container bernama mongodb
       containers:
       - name: mongodb
-        image: mongo #image docker
+        image: mongo:3 #image docker versi 3
         ports:
         - containerPort: 27017
 
@@ -40,12 +41,12 @@ spec:
           valueFrom:
             secretKeyRef:
               name: mongodb-secret
-              key: username #/etc/mongo-credentials/MONGO_ROOT_USERNAME
+              key: MONGO_ROOT_USERNAME #/etc/mongo-credentials/MONGO_ROOT_USERNAME
         - name: MONGO_INITDB_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
               name: mongodb-secret
-              key: password #/etc/mongo-credentials/MONGO_ROOT_PASSWORD
+              key: MONGO_ROOT_PASSWORD #/etc/mongo-credentials/MONGO_ROOT_PASSWORD
         #beberapa volumeMounts yang akan di mounted path pada container dengan volume yang digunakan
         volumeMounts:
         - name: mongo-data
