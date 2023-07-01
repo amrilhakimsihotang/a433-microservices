@@ -6,7 +6,7 @@ kind: Service
 
 #Metadata tambahan untuk objek Service
 metadata:
-  name: karsajobs-ui
+  name: karsajobs-ui-service
 
   labels:
     app: karsajobs-ui
@@ -20,7 +20,8 @@ spec:
 
   #Mendefinisikan port yang akan digunakan oleh Service.
   ports:
-  - protocol: TCP
+  - name: fe
+    protocol: TCP
     port: 8000
     targetPort: 8000
 

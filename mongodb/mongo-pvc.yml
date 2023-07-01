@@ -14,6 +14,6 @@ spec:
   - ReadWriteOnce #Mode akses volume-hanya dapat read/write sekali
   resources:
     requests:
-      storage: 1Gi #Jumlah penyimpanan yang diminta oleh PVC
+      storage: 20Gi #Jumlah penyimpanan yang diminta oleh PVC
 
   storageClassName: manual #Nama kelas penyimpanan yang digunakan oleh PVC

@@ -17,14 +17,13 @@ spec:
   #terkait dengan statefulset berdasarkan label "app=mongo"
   selector:
     matchLabels:
-      app: mongo
-      tier: backend
+      app: mongodb
+
   #serviceName: mongo
   template:
     metadata:
       labels:
-        app: mongo
-        tier: backend
+        app: mongodb
 
     spec:
       restartPolicy: Always #memastikan bahwa kontainer selalu di-restart jika terhenti. 

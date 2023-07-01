@@ -8,13 +8,13 @@ kind: Service
 metadata:
   name: mongodb-service
   labels:
-    name: mongodb-service
+    app: mongodb
 spec:
   #Selector yang digunakan untuk memilih pod yang akan dihubungkan dengan layanan ini
   #(dalam hal ini, pod dengan label "app: mongodb")
   selector:
     app: mongodb
-    tier: backend
+
 
   #Daftar port yang diekspos oleh layanan ini.  
   ports:
@@ -22,6 +22,4 @@ spec:
     protocol: TCP
     port: 27017
     targetPort: 27017
-
-  clusterIP: None #cluster IP none
 

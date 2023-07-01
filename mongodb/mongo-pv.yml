@@ -12,7 +12,7 @@ metadata:
 
 spec:
   capacity:
-    storage: 1Gi #Kapasitas penyimpanan yang dialokasikan untuk PersistentVolume
+    storage: 20Gi #Kapasitas penyimpanan yang dialokasikan untuk PersistentVolume
 
   accessModes:
   - ReadWriteOnce #Mode akses volume-hanya dapat read/write sekali

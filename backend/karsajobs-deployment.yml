@@ -14,11 +14,11 @@ spec:
   selector:
     #label karsajobs yang akan terhubung dengan service
     matchLabels:
-      app: karsajobs
+      app: karsajobs-service
   template: #template pod untuk menentukan label
     metadata:
       labels:
-        app: karsajobs
+        app: karsajobs-service
     spec:
       containers:
       - name: karsajobs
