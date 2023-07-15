@@ -31,7 +31,7 @@ services:
       - rabbitmq_network
 
   shipping-service:
-    image: ghcr.io/amrilhakimsihotang/a433-microservices/shipping-service:v1
+    image: ghcr.io/amrilhakimsihotang/a433-microservices/shipping-service:v1 #image yang digunakan
     container_name: shippingservice #nama kontainer untuk image shipping-service
     depends_on: #menjalankan terlebih dahulu service rabbitmq
       - rabbitmq
