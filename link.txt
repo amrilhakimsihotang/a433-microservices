@@ -1,0 +1,9 @@
+link github project submission 3
+https://github.com/amrilhakimsihotang/a433-microservices
+
+
+link image shipping-service
+ghcr.io/amrilhakimsihotang/a433-microservices/shipping-service:v1
+
+link image order-service
+ghcr.io/amrilhakimsihotang/a433-microservices/order-service:v1
