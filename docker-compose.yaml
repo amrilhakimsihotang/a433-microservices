@@ -1,0 +1,47 @@
+#versi docker
+version: '3.8'
+
+services:
+  rabbitmq:
+    image: rabbitmq:3.11-management-alpine
+    container_name: rabbitmqserv
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    networks:
+      - rabbitmq_network
+
+  order-service:
+    image: ghcr.io/amrilhakimsihotang/a433-microservices/order-service:v1
+    container_name: orderservice
+    depends_on:
+      - rabbitmq
+    ports:
+      - 3000:3000
+    command: sh -c '/bin/wait-for-it.sh rabbitmq:5672 --timeout=30 -- node index.js'
+    environment:
+      - PORT=3000
+      - AMQP_URL=amqp://guest:guest@rabbitmq:5672
+    networks:
+      - rabbitmq_network
+
+  shipping-service:
+    image: ghcr.io/amrilhakimsihotang/a433-microservices/shipping-service:v1
+    container_name: shippingservice
+    depends_on:
+      - rabbitmq
+    ports:
+      - 3001:3001
+    command: sh -c '/bin/wait-for-it.sh rabbitmq:5672 --timeout=50 -- node index.js'
+    environment:
+      - PORT=3001
+      - AMQP_URL=amqp://guest:guest@rabbitmq:5672
+    networks:
+      - rabbitmq_network
+
+networks:
+  rabbitmq_network:
+    driver: bridge
