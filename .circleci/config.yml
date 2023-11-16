@@ -29,8 +29,6 @@ jobs: # Mendefinisikan Jobs yang akan dilakukan
     - checkout
     - setup_remote_docker:
         docker_layer_caching: true
-    #     command: sudo nano /etc/systemd/system/docker.service
-
     #   # Menambahkan LimitNOFILE di dalam file tersebut
     # - run:
     #     name: Add LimitNOFILE to Docker systemd service file
@@ -69,7 +67,7 @@ jobs: # Mendefinisikan Jobs yang akan dilakukan
     - run:
         name: Build and Push Docker Image # Build and push Docker image ke GitHub registry
         command: |
-          mkdir /build &&
+          sudo mkdir /build &&
           docker build -t ghcr.io/amrilhakimsihotang/a433-microservices/amril2023/karsajobs:latest . &&
           docker push ghcr.io/amrilhakimsihotang/a433-microservices/amril2023/karsajobs:latest
 
