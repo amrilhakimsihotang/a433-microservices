@@ -30,9 +30,9 @@ jobs:
         command: go test -v -short --count=1 $(go list ./...)
 
     - name: Build and Push App Image # Build and push Docker image ke GitHub registry
-    run: |
-      cd "${GITHUB_WORKSPACE}/karsajobs" || exit
-      sh build_push_image_karsajobs.sh
+      run: |
+        cd "${GITHUB_WORKSPACE}/karsajobs" || exit
+        sh build_push_image_karsajobs.sh
 
 
 workflows: # Mendefinisikan workflow 
