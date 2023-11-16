@@ -34,8 +34,8 @@ jobs:
         # Build and push Docker image ke GitHub registry
         command: |
           echo "${GITHUB_TOKEN}" | docker login ghcr.io -u "${GITHUB_USERNAME}" --password-stdin
-          docker build -t ghcr.io/amrilhakimsihotang/a433-microservices/amril2023/karsajobs:latest .
-          docker push ghcr.io/amrilhakimsihotang/a433-microservices/amril2023/karsajobs:latest
+          sudo docker build -t ghcr.io/amrilhakimsihotang/a433-microservices/amril2023/karsajobs:latest .
+          sudo docker push ghcr.io/amrilhakimsihotang/a433-microservices/amril2023/karsajobs:latest
 
 workflows: # Mendefinisikan workflow 
   version: 2
