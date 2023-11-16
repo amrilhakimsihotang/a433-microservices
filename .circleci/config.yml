@@ -36,7 +36,7 @@ jobs: # Mendefinisikan Jobs yang akan dilakukan
     - run:
         name: Setup Docker
         command: |
-          sudo service docker start
+          sudo /etc/init.d/docker start
 
       # Langkah untuk memberikan izin akses ke /var/run/docker.sock
     - run:
