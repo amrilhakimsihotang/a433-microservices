@@ -6,34 +6,30 @@ jobs:
     - image: golang:1.15-alpine
 
     steps: # Langkah-langkah yang akan dieksekusi
-    - checkout
+    - name: Checkout
+      uses: actions/checkout@v2
 
-    - run:
-        name: Lint Dockerfile # Define the name of the step
-        command: |
-          apk --no-cache add curl
-          wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v2.12.0/hadolint-Linux-x86_64 &&\
-          chmod +x /bin/hadolint
+    - name: Lint Dockerfile
+      run: |
+        apk --no-cache add curl
+        wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v2.12.0/hadolint-Linux-x86_64 &&\
+        chmod +x /bin/hadolint
 
-    - run:
-        name: Install build dependencies # Menginstal build dependensi 
-        command: |
-          apk --no-cache add build-base
+    - name: Install build dependencies
+      run: |
+        apk --no-cache add build-base
 
-    - run:
-        name: Install Docker
-        command: |
-          apk --no-cache add docker
+    - name: Install Docker
+      run: |
+        apk --no-cache add docker
 
-    - run:
-        name: Test App
-        command: go test -v -short --count=1 $(go list ./...)
+    - name: Test App
+      run: go test -v -short --count=1 $(go list ./...)
 
     - name: Build and Push App Image # Build and push Docker image ke GitHub registry
       run: |
         cd "${GITHUB_WORKSPACE}/karsajobs" || exit
         sh build_push_image_karsajobs.sh
-
 
 workflows: # Mendefinisikan workflow 
   version: 2
