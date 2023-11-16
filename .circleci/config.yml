@@ -27,6 +27,17 @@ jobs: # Mendefinisikan Jobs yang akan dilakukan
     - image: cimg/base:current
     steps:
     - checkout
+    # Langkah untuk memastikan Docker sudah dijalankan
+    - run:
+        name: Setup Docker
+        command: |
+          sudo service docker start
+
+      # Langkah untuk memberikan izin akses ke /var/run/docker.sock
+    - run:
+        name: Allow access to Docker socket
+        command: |
+          sudo chmod 666 /var/run/docker.sock
     - run:
         name: Login to Docker Hub
         command: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
