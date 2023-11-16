@@ -24,7 +24,7 @@ jobs:
         name: Install Docker
         command: |
           apk --no-cache add docker
-          service docker start
+          rc-service docker start
           docker info
 
     - run:
