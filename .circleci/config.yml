@@ -27,7 +27,14 @@ jobs: # Mendefinisikan Jobs yang akan dilakukan
     - image: cimg/base:current
     steps:
     - checkout
-    # Langkah untuk memastikan Docker sudah dijalankan
+    - run:
+        name: Increase ulimit for Docker
+        command: |
+          sudo sh -c 'echo "fs.file-max = 100000" > /etc/sysctl.conf'
+          sudo sysctl -p
+
+
+      # Tambahkan langkah ini untuk mengatasi masalah ulimit
     - run:
         name: Setup Docker
         command: |
