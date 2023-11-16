@@ -33,9 +33,9 @@ jobs:
         name: Build and Push App Image
         # Build and push Docker image ke GitHub registry
         command: |
-          echo "${GITHUB_TOKEN}" | docker login ghcr.io -u "${GITHUB_USERNAME}" --password-stdin
-          sudo docker build -t ghcr.io/amrilhakimsihotang/a433-microservices/amril2023/karsajobs:latest .
-          sudo docker push ghcr.io/amrilhakimsihotang/a433-microservices/amril2023/karsajobs:latest
+          echo '{"auths":{"ghcr.io":{"username":"${GITHUB_USERNAME}","password":"${GITHUB_TOKEN}"}}}' > /root/.docker/config.json
+           docker build -t ghcr.io/amrilhakimsihotang/a433-microservices/amril2023/karsajobs:latest .
+           docker push ghcr.io/amrilhakimsihotang/a433-microservices/amril2023/karsajobs:latest
 
 workflows: # Mendefinisikan workflow 
   version: 2
