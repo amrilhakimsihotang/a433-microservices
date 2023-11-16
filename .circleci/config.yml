@@ -21,15 +21,17 @@ jobs:
           apk --no-cache add build-base
 
     - run:
-        name: Install Docker
-        command: |
-          apk --no-cache add docker
-          rc-service docker start
-          docker info
-
-    - run:
         name: Test App
         command: go test -v -short --count=1 $(go list ./...)
+
+  build-app:
+    docker:
+    - image: ubuntu:latest
+    - run:
+        name: Install Docker
+        command: |
+          apt-get update
+          apt-get install -y docker.io
 
     - run:
         name: Build and Push App Image
