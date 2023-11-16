@@ -1,0 +1,52 @@
+version: 2.1 # Menentukan versi Github Action yang digunakan
+
+jobs: # Mendefinisikan Jobs yang akan dilakukan
+  lint-dockerfile: #1
+    docker:
+    - image: python:latest
+    steps:
+    - checkout
+    - run:
+        name: Lint Dockerfile
+        command: |
+          wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v2.12.0/hadolint-Linux-x86_64 &&
+          chmod +x /bin/hadolint &&
+          hadolint Dockerfile
+
+  test-app: #2 Job untuk menjalankan unit tests
+    docker:
+    - image: golang:1.15
+    steps:
+    - checkout
+    - run:
+        name: Run Unit Tests
+        command: go test -v -short --count=1 $(go list ./...)
+
+  build-app-karsajobs: #3 Build app karsajobs
+    docker:
+    - image: cimg/base:latest
+    steps:
+    - checkout
+    - run:
+        name: Build and Push Docker Image # Build and push Docker image ke GitHub registry
+        command: |
+          mkdir /build &&
+          docker build -t ghcr.io/amrilhakimsihotang/a433-microservices/amril2023/karsajobs:latest . &&
+          docker push ghcr.io/amrilhakimsihotang/a433-microservices/amril2023/karsajobs:latest
+
+workflows: # Mendefinisikan workflow 
+  version: 2
+  karsajobs:
+    jobs:
+    - lint-dockerfile:
+        filters:
+          branches:
+            only: karsajobs
+    - test-app:
+        filters:
+          branches:
+            only: karsajobs
+    - build-app-karsajobs:
+        filters:
+          branches:
+            only: karsajobs
