@@ -29,7 +29,6 @@ jobs: # Mendefinisikan Jobs yang akan dilakukan
     - checkout
     - setup_remote_docker:
         docker_layer_caching: true
-    #   # Menambahkan LimitNOFILE di dalam file tersebut
     # - run:
     #     name: Add LimitNOFILE to Docker systemd service file
     #     command: sudo sh -c 'echo "LimitNOFILE=<ulimit_value>" >> /etc/systemd/system/docker.service'
@@ -61,7 +60,7 @@ jobs: # Mendefinisikan Jobs yang akan dilakukan
     #       sudo chmod 666 /var/run/docker.sock
     - run:
         name: Login to Docker Hub
-        command: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        command: echo "$GITHUB_TOKEN" | docker login ghcr.io -u $GITHUB_USERNAME --password-stdin
 
       # - run:
     - run:
