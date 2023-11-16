@@ -1,0 +1,46 @@
+version: 2.1
+
+jobs:
+  lint-dockerfile:
+    docker:
+    - image: hadolint/hadolint:latest
+    steps:
+    - checkout
+    - run:
+        name: Lint Dockerfile
+        command: hadolint Dockerfile
+
+  test-app:
+    docker:
+    - image: golang:latest
+    steps:
+    - checkout
+    - run:
+        name: Run Unit Tests
+        command: go test -v -short --count=1 $(go list ./...)
+
+  build-app-karsajobs:
+    docker:
+    - image: golang:latest
+    steps:
+    - checkout
+    - run:
+        name: Build and Push Docker Image
+        command: |
+          # Build and push Docker image ke GitHub registry
+          echo "$DOCKERHUB_TOKEN" | docker login ghcr.io -u $DOCKERHUB_USERNAME --password-stdin
+          docker build -t ghcr.io/amrilhakimsihotang/a433-microservices/amril2023/karsajobs:latest .
+          docker push ghcr.io/amrilhakimsihotang/a433-microservices/amril2023/karsajobs:latest
+
+
+workflows:
+  version: 2
+  lint-test-and-deploy:
+    jobs:
+    - lint-dockerfile
+    - test-app:
+        requires:
+        - lint-dockerfile
+    - build-app-karsajobs:
+        requires:
+        - test-app
