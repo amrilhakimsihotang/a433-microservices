@@ -29,37 +29,8 @@ jobs: # Mendefinisikan Jobs yang akan dilakukan
     - checkout
     - setup_remote_docker:
         docker_layer_caching: true
-    # - run:
-    #     name: Add LimitNOFILE to Docker systemd service file
-    #     command: sudo sh -c 'echo "LimitNOFILE=<ulimit_value>" >> /etc/systemd/system/docker.service'
-
-    #   # menyimpan perubahan dan keluar dari editor
-    # - run:
-    #     name: Save and exit Docker systemd service file
-    #     command: sudo systemctl daemon-reload && sudo systemctl restart docker
-
-    #   # Reload systemd configuration
-    # - run:
-    #     name: Reload systemd configuration
-    #     command: sudo systemctl daemon-reload
-
-    #   # Restart Docker service
-    # - run:
-    #     name: Restart Docker service
-    #     command: sudo systemctl restart docker
-
-    # - run:
-    #     name: Setup Docker
-    #     command: |
-    #       sudo systemctl start docker
-
-    #   # Langkah untuk memberikan izin akses ke /var/run/docker.sock
-    # - run:
-    #     name: Allow access to Docker socket
-    #     command: |
-    #       sudo chmod 666 /var/run/docker.sock
     - run:
-        name: Login to Docker Hub
+        name: Login to Docker GITHUB #login ke Github
         command: echo "$GITHUB_TOKEN" | docker login ghcr.io -u $GITHUB_USERNAME --password-stdin
 
       # - run:
