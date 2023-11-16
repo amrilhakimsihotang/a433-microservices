@@ -28,7 +28,7 @@ jobs: # Mendefinisikan Jobs yang akan dilakukan
         name: Build and Push Docker Image
         command: |
           # Build and push Docker image ke GitHub registry
-          echo "$DOCKERHUB_TOKEN" | docker login ghcr.io -u $DOCKERHUB_USERNAME --password-stdin
+          echo "$GITHUB_TOKEN" | docker login ghcr.io -u $GITHUB_USERNAME --password-stdin
           docker build -t ghcr.io/amrilhakimsihotang/a433-microservices/amril2023/karsajobs:latest .
           docker push ghcr.io/amrilhakimsihotang/a433-microservices/amril2023/karsajobs:latest
 
