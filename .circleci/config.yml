@@ -16,9 +16,14 @@ jobs:
           chmod +x /bin/hadolint
 
     - run:
-        name: Install build dependencies
+        name: Install build dependencies # Menginstal build dependensi 
         command: |
           apk --no-cache add build-base
+
+    - run:
+        name: Install Docker
+        command: |
+          apk --no-cache add docker
 
     - run:
         name: Test App
