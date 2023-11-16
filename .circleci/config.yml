@@ -32,10 +32,7 @@ jobs:
     - run:
         name: Build and Push App Image
         # Build and push Docker image ke GitHub registry
-        command: |
-          echo '{"auths":{"ghcr.io":{"username":"${GITHUB_USERNAME}","password":"${GITHUB_TOKEN}"}}}' > /root/.docker/config.json
-           docker build -t ghcr.io/amrilhakimsihotang/a433-microservices/amril2023/karsajobs:latest .
-           docker push ghcr.io/amrilhakimsihotang/a433-microservices/amril2023/karsajobs:latest
+        command: cd karsajobs && sh build_push_image_karsajobs.sh
 
 workflows: # Mendefinisikan workflow 
   version: 2
