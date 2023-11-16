@@ -30,7 +30,7 @@ jobs: # Mendefinisikan Jobs yang akan dilakukan
         command: "sudo mkdir /build && \ndocker build -t ghcr.io/amrilhakimsihotang/a433-microservices/amril2023/karsajobs-ui:latest . &&\ndocker push ghcr.io/amrilhakimsihotang/a433-microservices/amril2023/karsajobs-ui:latest\n#magic___^_^___line\n"
 workflows: # Mendefinisikan workflow 
   version: 2
-  karsajobs:
+  karsajobs-ui:
     jobs: #Job yang dilakukan untuk branch karsajob-ui
     - lint-dockerfile:
         filters:
@@ -40,7 +40,7 @@ workflows: # Mendefinisikan workflow
         filters:
           branches:
             only: karsajobs-ui
-    - build-app-karsajobs:
+    - build-app-karsajobs-ui:
         filters:
           branches:
             only: karsajobs-ui
