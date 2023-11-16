@@ -12,7 +12,7 @@ jobs: # Mendefinisikan Jobs yang akan dilakukan
 
   test-app: # Job untuk menjalankan unit tests pada aplikasi Go
     docker: # Menggunakan container Docker dengan image golang:latest
-    - image: golang:latest
+    - image: golang:1.15-alpine
     steps: # Langkah-langkah yang akan dieksekusi
     - checkout
     - run:
@@ -21,7 +21,7 @@ jobs: # Mendefinisikan Jobs yang akan dilakukan
 
   build-app-karsajobs:
     docker: # Menggunakan container Docker dengan image golang:latest.
-    - image: golang:latest
+    - image: golang:1.15-alpine
     steps: # Langkah-langkah yang akan dieksekusi
     - checkout
     - run:
