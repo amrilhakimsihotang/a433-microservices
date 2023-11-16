@@ -24,7 +24,7 @@ jobs: # Mendefinisikan Jobs yang akan dilakukan
 
   build-app-karsajobs: #3 Build app karsajobs
     docker:
-    - image: cimg/base:latest
+    - image: cimg/base:current
     steps:
     - checkout
     - run:
