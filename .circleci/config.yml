@@ -24,7 +24,7 @@ jobs: # Mendefinisikan Jobs yang akan dilakukan
 
   build-app-karsajobs: #3 Build app karsajobs
     docker:
-    - image: cimg/base:current
+    - image: cimg/base:current #Image docker yang digunakan
     steps:
     - checkout
     - setup_remote_docker:
