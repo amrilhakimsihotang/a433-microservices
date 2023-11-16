@@ -27,7 +27,8 @@ jobs: # Mendefinisikan Jobs yang akan dilakukan
     - image: cimg/base:current
     steps:
     - checkout
-    # langkah ini untuk membuka Docker systemd service file
+    - setup_remote_docker:
+        docker_layer_caching: true
     - run:
         name: Open Docker systemd service file
         command: sudo nano /etc/systemd/system/docker.service
