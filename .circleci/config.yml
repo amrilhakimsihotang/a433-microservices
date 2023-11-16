@@ -33,8 +33,6 @@ jobs: # Mendefinisikan Jobs yang akan dilakukan
           sudo sh -c 'echo "fs.file-max = 100000" > /etc/sysctl.conf'
           sudo sysctl -p
 
-
-      # Tambahkan langkah ini untuk mengatasi masalah ulimit
     - run:
         name: Setup Docker
         command: |
