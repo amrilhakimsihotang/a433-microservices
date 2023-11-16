@@ -24,8 +24,8 @@ jobs:
         name: Install Docker
         command: |
           apk --no-cache add docker
-          sudo service docker start
-          sudo docker info
+          service docker start
+          docker info
 
     - run:
         name: Test App
