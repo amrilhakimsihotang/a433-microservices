@@ -27,16 +27,35 @@ jobs: # Mendefinisikan Jobs yang akan dilakukan
     - image: cimg/base:current
     steps:
     - checkout
+    # langkah ini untuk membuka Docker systemd service file
     - run:
-        name: Increase ulimit for Docker
-        command: |
-          sudo sh -c 'echo "fs.file-max = 100000" > /etc/sysctl.conf'
-          sudo sysctl -p
+        name: Open Docker systemd service file
+        command: sudo nano /etc/systemd/system/docker.service
+
+      # Menambahkan LimitNOFILE di dalam file tersebut
+    - run:
+        name: Add LimitNOFILE to Docker systemd service file
+        command: sudo sh -c 'echo "LimitNOFILE=<ulimit_value>" >> /etc/systemd/system/docker.service'
+
+      # menyimpan perubahan dan keluar dari editor
+    - run:
+        name: Save and exit Docker systemd service file
+        command: sudo systemctl daemon-reload && sudo systemctl restart docker
+
+      # Reload systemd configuration
+    - run:
+        name: Reload systemd configuration
+        command: sudo systemctl daemon-reload
+
+      # Restart Docker service
+    - run:
+        name: Restart Docker service
+        command: sudo systemctl restart docker
 
     - run:
         name: Setup Docker
         command: |
-          sudo /etc/init.d/docker start
+          sudo systemctl start docker
 
       # Langkah untuk memberikan izin akses ke /var/run/docker.sock
     - run:
