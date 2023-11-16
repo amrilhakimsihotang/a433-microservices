@@ -36,10 +36,7 @@ workflows: # Mendefinisikan workflow
         filters:
           branches:
             only: karsajobs-ui
-    - test-app:
-        filters:
-          branches:
-            only: karsajobs-ui
+
     - build-app-karsajobs-ui:
         filters:
           branches:
